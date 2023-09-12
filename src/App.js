@@ -18,11 +18,12 @@ function App() {
 
   let boards = useSelector((store) => store.data);
   const board = boards.find((element) => element.id === selectedBoard);
-  const idx = boards.find((element, idx) => {
-    if (element.id === selectedBoard) {
-      return idx;
-    }
-  });
+  const boardIdx = boards.findIndex((element) => element.id === selectedBoard);
+  // const idx = boards.find((element, idx) => {
+  //   if (element.id === selectedBoard) {
+  //     return idx;
+  //   }
+  // });
 
   useEffect(() => {
     dispatch(getData);
@@ -48,12 +49,12 @@ function App() {
       return;
     }
 
-    const idx = boards.find((element, idx) => {
-      if (element.id === selectedBoard) {
-        return idx;
-      }
-    });
-    console.log(idx);
+    // const idx = boards.map((element, idx) => {
+    //   if (element.id == selectedBoard) {
+    //     return idx;
+    //   }
+    // });
+    // console.log("idx",boardIdx);
 
     let add;
     let resources = board.resources;
@@ -91,16 +92,16 @@ function App() {
       return;
     }
 
-    // dispatch(updateResources(idx, add));
-    // dispatch(updateTodo(idx, add));
-    // dispatch(updateDoing(idx, add));
-    // dispatch(updateDone(idx, add));
+    // dispatch(updateResources(boardIdx, add));
+    // dispatch(updateTodo(boardIdx, add));
+    // dispatch(updateDoing(boardIdx, add));
+    // dispatch(updateDone(boardIdx, add));
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
-        <select onChange={(e) => onChange(e)}>
+        <select onChange={(e) => onChange(e)} className="selectTag">
           {boards.map((ele, idx) => {
             return (
               <option key={idx} value={ele.name}>

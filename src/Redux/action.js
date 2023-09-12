@@ -152,15 +152,15 @@ export const getData = (dispatch) => {
   dispatch({ type: "FETCH", payload: { idx: 0, data: boards } });
 };
 
-export const updateResources = (idx, add) => (dispatch) => {
-  dispatch({ type: RESOURCES, payload: { idx, data:add } });
+export const updateResources = (boardIdx, add) => (dispatch) => {
+  dispatch({ type: RESOURCES, payload: { idx: boardIdx, data: add } });
 };
-export const updateTodo = (idx, add) => (dispatch) => {
-  dispatch({ type: TODO, payload: { idx, data:add } });
+export const updateTodo = (boardIdx, add) => (dispatch) => {
+  dispatch({ type: TODO, payload: { idx: boardIdx, data: add } });
 };
-export const updateDoing = (idx, add) => (dispatch) => {
-  dispatch({ type: DOING, payload: { idx, data:add } });
+export const updateDoing = (boardIdx, add) => (dispatch) => {
+  dispatch({ type: DOING, payload: { idx: boardIdx, data: add } });
 };
-export const updateDone = (idx, add) => (dispatch) => {
-  dispatch({ type: DONE, payload: { idx, data:add } });
+export const updateDone = (boardIdx, add) => (dispatch) => {
+  dispatch({ type: DONE, payload: { idx: boardIdx, data: add } });
 };
