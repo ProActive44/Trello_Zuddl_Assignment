@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+## Here is the answers for How would I would apply tables and apis change for the following scenarios. and What tables and api endpoints would I add? also Which tables and api endpoints would need to be updated?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 1.If a user can create and edit stages for a particular board. For example instead of Open > In Progress > Done if they want the stages of their task board to be Read > Working > Reviewing > Completed
 
-## Available Scripts
+**Board Table:** We might need to add a column to the board table to store the custom stages selected by the user.
 
-In the project directory, you can run:
+**API Endpoints:**
+Create Board: The endpoint for creating a board would need to accept the custom stages as input.
+Edit Board: We would need a new endpoint to allow users to edit the stages for a board.
+Get Board Details: This endpoint should return the custom stages along with other board details.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2.If users can comment on tasks
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+If users can comment on tasks, we need to introduce new tables and endpoints for managing comments.
 
-### `npm test`
+Tables:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Comment Table: We need to create a table to store comments with fields like comment text, timestamp, and the user who made the comment.
+Task-Comment Relationship: Create a relationship between tasks and comments, so that each task can have multiple comments associated with it.
+API Endpoints:
 
-### `npm run build`
+Create Comment: An endpoint to allow users to create comments for a specific task.
+Edit Comment: An endpoint to edit or delete a comment.
+Get Comments for Task: An endpoint to retrieve all comments for a specific task.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3.How will you do error handling?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For error handling, we should implement a robust strategy to provide meaningful feedback to users and developers.
 
-### `npm run eject`
+Validation Errors: If a user provides invalid data (e.g., creating a board with duplicate name), the API should return appropriate validation error messages.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Authorization Errors: Ensure that users can only edit boards or add comments to tasks that they have the appropriate permissions for. Return 403 Forbidden errors for unauthorized actions.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Not Found Errors: Handle cases where users try to access boards, tasks, or comments that do not exist with 404 Not Found responses.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Internal Server Errors: Catch unexpected errors on the server-side and return 500 Internal Server Error responses with detailed error messages for debugging purposes. Log these errors for future investigation.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Client Errors: Implement client-side error handling to gracefully handle network issues, failed API requests, and unexpected responses.

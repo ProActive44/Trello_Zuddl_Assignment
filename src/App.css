@@ -31,6 +31,7 @@
 .flex{
   flex-wrap: wrap;
   /* position: relative; */
+  gap:20px;
    font-weight: 500;
   justify-content: space-between;
   
@@ -38,7 +39,7 @@
 
 .stages{
   min-width: 200px;
-  width: 24%;
+  width: 22%;
   /* margin: auto; */
   border-radius: 5px;
   text-align: left;
