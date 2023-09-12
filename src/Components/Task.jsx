@@ -9,7 +9,7 @@ const Task = ({ index, ele, id }) => {
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
-  // console.log(ele)
+  // console.log(id)
 
   return (
     <Draggable draggableId={ele.id.toString()} index={index}>

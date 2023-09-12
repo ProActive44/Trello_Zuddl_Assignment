@@ -1,9 +1,37 @@
 import "./App.css";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 import Board from "./Pages/Board";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getData,
+  updateDoing,
+  updateDone,
+  updateResources,
+  updateTodo,
+} from "./Redux/action";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
+  const [selectedBoard, setSelectedBoard] = useState("board1");
+  const dispatch = useDispatch();
+
+  let boards = useSelector((store) => store.data);
+  const board = boards.find((element) => element.id === selectedBoard);
+  const idx = boards.find((element, idx) => {
+    if (element.id === selectedBoard) {
+      return idx;
+    }
+  });
+
+  useEffect(() => {
+    dispatch(getData);
+  }, []);
+
+  const onChange = (e) => {
+    setSelectedBoard(e.target.value);
+  };
+
   const onDragEnd = (result) => {
     const { destination, source } = result;
 
@@ -20,38 +48,68 @@ function App() {
       return;
     }
 
-    // let add;
-    // let active = todos;
-    // let complete = CompletedTodos;
+    const idx = boards.find((element, idx) => {
+      if (element.id === selectedBoard) {
+        return idx;
+      }
+    });
+    console.log(idx);
+
+    let add;
+    let resources = board.resources;
+    let todo = board.todo;
+    let doing = board.doing;
+    let done = board.done;
 
     // // Source Logic
     if (source.droppableId === "resourcesList") {
-      //   add = active[source.index];
-      //   active.splice(source.index, 1);
+      add = resources[source.index];
+      resources.splice(source.index, 1);
     } else if (source.droppableId === "todoList") {
+      add = todo[source.index];
+      todo.splice(source.index, 1);
     } else if (source.droppableId === "doingList") {
+      add = doing[source.index];
+      doing.splice(source.index, 1);
+    } else if (source.droppableId === "doneList") {
+      add = done[source.index];
+      done.splice(source.index, 1);
     } else {
-      //   add = complete[source.index];
-      //   complete.splice(source.index, 1);
+      return;
     }
 
     // // Destination Logic
     if (destination.droppableId === "resourcesList") {
-      //   active.splice(destination.index, 0, add);
+      resources.splice(destination.index, 0, add);
     } else if (destination.droppableId === "todoList") {
+      todo.splice(destination.index, 0, add);
     } else if (destination.droppableId === "doingList") {
+      doing.splice(destination.index, 0, add);
+    } else if (destination.droppableId === "doneList") {
+      done.splice(destination.index, 0, add);
     } else {
-      //   complete.splice(destination.index, 0, add);
+      return;
     }
 
-    // setCompletedTodos(complete);
-    // setTodos(active);
+    // dispatch(updateResources(idx, add));
+    // dispatch(updateTodo(idx, add));
+    // dispatch(updateDoing(idx, add));
+    // dispatch(updateDone(idx, add));
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
-        <Board />
+        <select onChange={(e) => onChange(e)}>
+          {boards.map((ele, idx) => {
+            return (
+              <option key={idx} value={ele.name}>
+                {ele.name}
+              </option>
+            );
+          })}
+        </select>
+        <Board data={board} />
       </div>
     </DragDropContext>
   );

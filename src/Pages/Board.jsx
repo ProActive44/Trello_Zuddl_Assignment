@@ -5,16 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Task from "../Components/Task";
 import { Droppable } from "react-beautiful-dnd";
 
-const Board = () => {
-  const [selectedBoard, setSelectedBoard] = useState("board1");
-  const dispatch = useDispatch();
+const Board = ({data}) => {
 
-  let data = useSelector((store) => store.data[0]);
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(getData(selectedBoard));
-  }, []);
 
   return (
     <Box className="board">

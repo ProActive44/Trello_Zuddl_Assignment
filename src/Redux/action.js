@@ -1,3 +1,5 @@
+import { DOING, DONE, RESOURCES, TODO } from "./actionTypes";
+
 const boards = [
   {
     id: "board1",
@@ -146,9 +148,19 @@ const boards = [
   },
 ];
 
-export const getData = (board) => (dispatch) => {
-    let data = [];
-    data = boards.filter((ele)=>ele.id === board)
-    // console.log(data)
-    dispatch({type:'FETCH', payload:data})
+export const getData = (dispatch) => {
+  dispatch({ type: "FETCH", payload: { idx: 0, data: boards } });
+};
+
+export const updateResources = (idx, add) => (dispatch) => {
+  dispatch({ type: RESOURCES, payload: { idx, data:add } });
+};
+export const updateTodo = (idx, add) => (dispatch) => {
+  dispatch({ type: TODO, payload: { idx, data:add } });
+};
+export const updateDoing = (idx, add) => (dispatch) => {
+  dispatch({ type: DOING, payload: { idx, data:add } });
+};
+export const updateDone = (idx, add) => (dispatch) => {
+  dispatch({ type: DONE, payload: { idx, data:add } });
 };
