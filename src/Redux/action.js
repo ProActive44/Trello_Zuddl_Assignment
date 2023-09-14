@@ -164,3 +164,12 @@ export const updateDoing = (boardIdx, add) => (dispatch) => {
 export const updateDone = (boardIdx, add) => (dispatch) => {
   dispatch({ type: DONE, payload: { idx: boardIdx, data: add } });
 };
+
+export const addNewData = (state, name, boardIdx) => (dispatch) => {
+  let payload = {
+    data: state,
+    name,
+    boardIdx,
+  };
+  dispatch({ type: "NEWDATA", payload });
+};

@@ -18,12 +18,9 @@ function App() {
 
   let boards = useSelector((store) => store.data);
   const board = boards.find((element) => element.id === selectedBoard);
-  const boardIdx = boards.findIndex((element) => element.id === selectedBoard);
-  // const idx = boards.find((element, idx) => {
-  //   if (element.id === selectedBoard) {
-  //     return idx;
-  //   }
-  // });
+  const boardIdx = boards?.findIndex((element) => element.id === selectedBoard);
+
+  // console.log(boardIdx)
 
   useEffect(() => {
     dispatch(getData);
@@ -36,7 +33,7 @@ function App() {
   const onDragEnd = (result) => {
     const { destination, source } = result;
 
-    console.log(result);
+    // console.log(result);
 
     if (!destination) {
       return;
@@ -48,13 +45,6 @@ function App() {
     ) {
       return;
     }
-
-    // const idx = boards.map((element, idx) => {
-    //   if (element.id == selectedBoard) {
-    //     return idx;
-    //   }
-    // });
-    // console.log("idx",boardIdx);
 
     let add;
     let resources = board.resources;
@@ -110,7 +100,7 @@ function App() {
             );
           })}
         </select>
-        <Board data={board} />
+        <Board data={board} boardIdx={boardIdx} />
       </div>
     </DragDropContext>
   );
