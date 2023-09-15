@@ -6,8 +6,7 @@ import Task from "../Components/Task";
 import { Droppable } from "react-beautiful-dnd";
 import Cards from "../Components/Cards";
 
-const Board = ({data, boardIdx}) => {
-
+const Board = ({ data, boardIdx }) => {
   return (
     <Box className="board">
       <Box w="100%" textAlign="left">
@@ -17,11 +16,31 @@ const Board = ({data, boardIdx}) => {
       </Box>
 
       <Flex className="flex">
-        <Cards data={data?.resources} drpId='resourcesList' name="resources" boardIdx={boardIdx}/>
-        <Cards data={data?.todo} drpId='todoList' name="todo" boardIdx={boardIdx}/>
-        <Cards data={data?.doing} drpId='doingList' name="doing" boardIdx={boardIdx}/>
-        <Cards data={data?.done} drpId='doneList' name="done" boardIdx={boardIdx}/>
-      </Flex> 
+        <Cards
+          data={data?.resources}
+          drpId="resourcesList"
+          name="resources"
+          boardIdx={boardIdx}
+        />
+        <Cards
+          data={data?.todo}
+          drpId="todoList"
+          name="todo"
+          boardIdx={boardIdx}
+        />
+        <Cards
+          data={data?.doing}
+          drpId="doingList"
+          name="doing"
+          boardIdx={boardIdx}
+        />
+        <Cards
+          data={data?.done}
+          drpId="doneList"
+          name="done"
+          boardIdx={boardIdx}
+        />
+      </Flex>
     </Box>
   );
 };
